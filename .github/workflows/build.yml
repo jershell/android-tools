@@ -76,6 +76,7 @@ jobs:
       - name: prep opensuse
         if: startsWith(matrix.os, 'opensuse')
         run: |
+          zypper rm -u gcc12 gcc12-c++ libstdc++6 libgcc_s1
           zypper -n ref
           zypper -n in ${{ matrix.pkgs }} cmake git go gtest pcre2-devel pkgconfig \
             'pkgconfig(libbrotlicommon)' 'pkgconfig(liblz4)' \
@@ -85,6 +86,7 @@ jobs:
       - name: prep archlinux
         if: startsWith(matrix.os, 'archlinux')
         run: |
+          pacman -R gcc
           pacman -Syu --needed --noconfirm \
             ${{ matrix.pkgs }} brotli cmake git go gtest libunwind \
             libusb lz4 pcre2 pkgconfig protobuf zstd ninja
