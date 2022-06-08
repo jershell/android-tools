@@ -117,6 +117,7 @@ jobs:
 
       - name: build & install
         run: |
+          command -v clang && clang -E -x c -v || { echo "no clang"; }
           test -n "${{ matrix.env1 }}" && export ${{ matrix.env1 }}
           test -n "${{ matrix.env2 }}" && export ${{ matrix.env2 }}
           mkdir build && cd build
