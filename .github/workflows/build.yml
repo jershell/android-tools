@@ -45,12 +45,12 @@ jobs:
           - os: "opensuse/tumbleweed"
             pkgs: "gcc gcc-c++"
           - os: "opensuse/tumbleweed"
-            pkgs: clang
+            pkgs: "clang gcc10 gcc10-c++"
             env1: "CC=clang CXX=clang++"
           - os: "archlinux:base"
             pkgs: gcc
           - os: "archlinux:base"
-            pkgs: clang
+            pkgs: "clang gcc11"
             env1: "CC=clang CXX=clang++"
           - os: "ubuntu:20.04"
             pkgs: "gcc-10 g++-10"
@@ -76,7 +76,6 @@ jobs:
       - name: prep opensuse
         if: startsWith(matrix.os, 'opensuse')
         run: |
-          zypper rm -u gcc12 gcc12-c++ libstdc++6 libgcc_s1
           zypper -n ref
           zypper -n in ${{ matrix.pkgs }} cmake git go gtest pcre2-devel pkgconfig \
             'pkgconfig(libbrotlicommon)' 'pkgconfig(liblz4)' \
@@ -86,7 +85,6 @@ jobs:
       - name: prep archlinux
         if: startsWith(matrix.os, 'archlinux')
         run: |
-          pacman -R gcc
           pacman -Syu --needed --noconfirm \
             ${{ matrix.pkgs }} brotli cmake git go gtest libunwind \
             libusb lz4 pcre2 pkgconfig protobuf zstd ninja
