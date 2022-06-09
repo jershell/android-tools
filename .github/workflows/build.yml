@@ -124,7 +124,7 @@ jobs:
           test -n "${{ matrix.env1 }}" && export ${{ matrix.env1 }}
           test -n "${{ matrix.env2 }}" && export ${{ matrix.env2 }}
           mkdir build && cd build
-          cmake -DCMAKE_C_FLAGS="$CFLAGS" -DCMAKE_CXX_FLAGS="$CXXFLAGS" -DCMAKE_BUILD_TYPE=Release -GNinja ..
+          cmake -DCMAKE_C_FLAGS="$CFLAGS" -DCMAKE_CXX_FLAGS="$CXXFLAGS" -GNinja ..
           ninja --verbose
           echo -e "\n### make install ###\n"
           ninja install
