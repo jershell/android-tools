@@ -80,6 +80,7 @@ jobs:
         if: startsWith(matrix.os, 'opensuse')
         run: |
           zypper -n ref
+          zypper remove -y gcc12
           zypper -n in ${{ matrix.pkgs }} cmake git go gtest pcre2-devel pkgconfig \
             'pkgconfig(libbrotlicommon)' 'pkgconfig(liblz4)' \
             'pkgconfig(libunwind-generic)' 'pkgconfig(libusb-1.0)' \
